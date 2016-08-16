@@ -62,7 +62,7 @@ namespace GBH
 
             if (key == Keys.Back)
             {
-                if (_inputBuffer.Length > 0)
+                if (!string.IsNullOrEmpty(_inputBuffer))
                 {
                     _inputBuffer = _inputBuffer.Substring(0, _inputBuffer.Length - 1);
                     _typedInputBuffer = _inputBuffer;
