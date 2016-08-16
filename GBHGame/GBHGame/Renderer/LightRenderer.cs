@@ -44,6 +44,11 @@ namespace GBH
 
             _halfPixel = new Vector2(0.5f / (float)device.PresentationParameters.BackBufferWidth, 0.5f / (float)device.PresentationParameters.BackBufferHeight);
 
+            GameWindow.Resized += (size) =>
+            {
+                _halfPixel = new Vector2(0.5f / (float)device.PresentationParameters.BackBufferWidth, 0.5f / (float)device.PresentationParameters.BackBufferHeight);
+            };
+
             r_sunIntensity = ConVar.Register("r_sunIntensity", 1.6f, "Sun intensity, duh.", ConVarFlags.Archived);
         }
 

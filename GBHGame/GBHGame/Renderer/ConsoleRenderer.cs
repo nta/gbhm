@@ -44,8 +44,14 @@ namespace GBH
         {
             LargeConsole = true;
 
-            _screenX = 1280;
-            _screenY = 720;
+            _screenX = GameWindow.ViewportSize.Width;
+            _screenY = GameWindow.ViewportSize.Height;
+
+            GameWindow.Resized += (size) =>
+            {
+                _screenX = size.Width;
+                _screenY = size.Height;
+            };
         }
 
         public static void HandleKey(Keys key)

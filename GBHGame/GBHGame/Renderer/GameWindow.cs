@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -16,7 +17,28 @@ namespace GBH
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
 
+            UpdateFullscreenMode(_vid_fullscreen.GetValue<bool>());
+
             this.Show();
+        }
+
+        private void UpdateFullscreenMode(bool isFullScreen)
+        {
+            this.FormBorderStyle = (isFullScreen) ? FormBorderStyle.None : FormBorderStyle.Fixed3D;
+
+            if (isFullScreen)
+            {
+                Rectangle screenBoundary = Screen.PrimaryScreen.Bounds;
+                this.ClientSize = screenBoundary.Size;
+                this.Location = screenBoundary.Location;
+            }
+            else
+            {
+                this.ClientSize = new System.Drawing.Size(1280, 720);
+                this.Location = new Point(10, 10);
+            }
+
+            Resized?.Invoke(this.ClientSize);
         }
 
         private IntPtr hIMC;
@@ -49,9 +71,39 @@ namespace GBH
         private static Win32.NativeMessage _msg;
         private static GameWindow _gw;
 
+        private static ConVar _vid_fullscreen;
+        private static bool? _lastFullscreenValue;
+
+        public static event Action<Size> Resized;
+
+        public static Size ViewportSize
+        {
+            get
+            {
+                return _gw.ClientSize;
+            }
+        }
+
         public static void Initialize()
         {
+            _vid_fullscreen = ConVar.Register<bool>("vid_fullscreen", false, "Fullscreen mode enabled?", ConVarFlags.Archived);
             _gw = new GameWindow();
+        }
+
+        public static void Process()
+        {
+            bool currentFullscreenValue = _vid_fullscreen.GetValue<bool>();
+
+            if (currentFullscreenValue != _lastFullscreenValue)
+            {
+                // if this isn't the value changing from null to true/false (tri-state bools? yes.)
+                if (_lastFullscreenValue != null)
+                {
+                    _gw.UpdateFullscreenMode(currentFullscreenValue);
+                }
+
+                _lastFullscreenValue = currentFullscreenValue;
+            }
         }
 
         public static IntPtr NativeHandle

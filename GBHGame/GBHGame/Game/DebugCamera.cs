@@ -60,7 +60,7 @@ namespace GBH
             FontManager.SetColor(Color.White);
             FontManager.SetFont(FontStyle.Console);
             FontManager.PrintString(new Vector2(5f, 5f), string.Format("Position: ({0}, {1})", Camera.MainCamera.Position.X, Camera.MainCamera.Position.Y));
-            FontManager.PrintString(new Vector2(5f, 720f - 12f - 5f), string.Format("Client state: {0}", Client.State));
+            FontManager.PrintString(new Vector2(5f, GameWindow.ViewportSize.Height - 12f - 5f), string.Format("Client state: {0}", Client.State));
         }
 
         public static void HandleKey(Keys key, bool down)

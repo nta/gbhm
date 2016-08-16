@@ -125,6 +125,9 @@ namespace GBH
 
             _lastTime = _frameTime;
 
+            // game window events
+            GameWindow.Process();
+
             // process the command buffer
             Command.ExecuteBuffer();
 

@@ -44,41 +44,55 @@ namespace GBH
             r_hdr_enable = ConVar.Register("r_hdr_enable", false, "Enable high dynamic range rendering.", ConVarFlags.Archived);
 
             // create render targets
-            int width = device.PresentationParameters.BackBufferWidth;
-            int height = device.PresentationParameters.BackBufferHeight;
-
-            _colorRT = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.Depth16);
-            _depthRT = new RenderTarget2D(device, width, height, false, SurfaceFormat.Single, DepthFormat.Depth16);
-            _normalRT = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.Depth16);
-            _lightRT = new RenderTarget2D(device, width, height, false, (r_hdr_enable.GetValue<bool>()) ? SurfaceFormat.Rgba1010102 : SurfaceFormat.Color, DepthFormat.Depth16);
-
-            if (r_hdr_enable.GetValue<bool>())
+            Action createRTs = () =>
             {
-                _hdrRT = new RenderTarget2D(device, width, height, false, SurfaceFormat.Rgba1010102, DepthFormat.None);
-                _hdrBloomRT = new RenderTarget2D(device, width, height, false, SurfaceFormat.Rgba1010102, DepthFormat.None);
+                int width = device.PresentationParameters.BackBufferWidth;
+                int height = device.PresentationParameters.BackBufferHeight;
 
-                int sampleEntries = 1;
-                int startSize = Math.Min(width / 16, height / 16);
+                _colorRT?.Dispose();
+                _depthRT?.Dispose();
+                _normalRT?.Dispose();
+                _lightRT?.Dispose();
+                _hdrRT?.Dispose();
+                _hdrBloomRT?.Dispose();
 
-                int size = 16;
-                for (size = 16; size < startSize; size *= 4)
+                _colorRT = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.Depth16);
+                _depthRT = new RenderTarget2D(device, width, height, false, SurfaceFormat.Single, DepthFormat.Depth16);
+                _normalRT = new RenderTarget2D(device, width, height, false, SurfaceFormat.Color, DepthFormat.Depth16);
+                _lightRT = new RenderTarget2D(device, width, height, false, (r_hdr_enable.GetValue<bool>()) ? SurfaceFormat.Rgba1010102 : SurfaceFormat.Color, DepthFormat.Depth16);
+
+                if (r_hdr_enable.GetValue<bool>())
                 {
-                    sampleEntries++;
-                }
+                    _hdrRT = new RenderTarget2D(device, width, height, false, SurfaceFormat.Rgba1010102, DepthFormat.None);
+                    _hdrBloomRT = new RenderTarget2D(device, width, height, false, SurfaceFormat.Rgba1010102, DepthFormat.None);
 
-                _lightDownsampleRTs = new RenderTarget2D[sampleEntries];
+                    int sampleEntries = 1;
+                    int startSize = Math.Min(width / 16, height / 16);
 
-                size /= 4;
+                    int size = 16;
+                    for (size = 16; size < startSize; size *= 4)
+                    {
+                        sampleEntries++;
+                    }
 
-                for (int i = 0; i < sampleEntries; i++)
-                {
-                    _lightDownsampleRTs[i] = new RenderTarget2D(device, size, size, false, SurfaceFormat.Single, DepthFormat.None);
+                    _lightDownsampleRTs = new RenderTarget2D[sampleEntries];
+
                     size /= 4;
+
+                    for (int i = 0; i < sampleEntries; i++)
+                    {
+                        _lightDownsampleRTs[i] = new RenderTarget2D(device, size, size, false, SurfaceFormat.Single, DepthFormat.None);
+                        size /= 4;
+                    }
+
+                    _avgLightRT = new RenderTarget2D(device, 1, 1, false, SurfaceFormat.Single, DepthFormat.None);
                 }
+            };
 
-                _avgLightRT = new RenderTarget2D(device, 1, 1, false, SurfaceFormat.Single, DepthFormat.None);
-            }
+            createRTs();
 
+            GameWindow.Resized += (a) => createRTs();
+            
             // load shaders
             _baseEffect = EffectManager.Load("BaseDraw", device);
             _compositeEffect = EffectManager.Load("ScreenComposite", device);

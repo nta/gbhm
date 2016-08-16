@@ -23,18 +23,24 @@ namespace GBH
             pp.DeviceWindowHandle = GameWindow.NativeHandle;
 
             pp.BackBufferFormat = SurfaceFormat.Color;
-            pp.BackBufferWidth = 1280;
-            pp.BackBufferHeight = 720;
+            pp.BackBufferWidth = GameWindow.ViewportSize.Width;
+            pp.BackBufferHeight = GameWindow.ViewportSize.Height;
             pp.RenderTargetUsage = RenderTargetUsage.DiscardContents;
             pp.IsFullScreen = false;
-
-            //pp.MultiSampleCount = 2;
 
             pp.DepthStencilFormat = DepthFormat.Depth16;
 
             pp.PresentationInterval = PresentInterval.Immediate;
 
             Device = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, pp);
+
+            GameWindow.Resized += (size) =>
+            {
+                Device.PresentationParameters.BackBufferWidth = size.Width;
+                Device.PresentationParameters.BackBufferHeight = size.Height;
+
+                Device.Reset(Device.PresentationParameters);
+            };
 
             //Device.Initialize();
 
