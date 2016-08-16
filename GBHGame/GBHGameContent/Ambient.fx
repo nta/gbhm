@@ -66,7 +66,7 @@ float g_directional;
 
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
-    float2 texCoord = input.TexCoord - HalfPixel;
+    /*float2 texCoord = input.TexCoord - HalfPixel;
 
     float depthVal = tex2D(depthSampler, texCoord).r;
     float4 position;
@@ -77,10 +77,12 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
     position /= position.w;
 
     float4 normalStuff = tex2D(normalSampler, texCoord);
-	float3 normal = 2.0f * (normalStuff.xyz - 0.5f);
+	float3 normal = 2.0f * (normalStuff.xyz - 0.5f);*/
 
-	float3 ambient = float3(0.5f, 0.5f, 0.5f);
-	float dirFactor = saturate(dot(float3(-0.5f, -0.5f, 1.0f), normal));
+	float3 ambient = float3(0.4f, 0.4f, 0.4f);
+
+    // we're night lighting so ambient is just ambient
+	/*float dirFactor = saturate(dot(float3(-0.5f, -0.5f, 1.0f), normal));
 	float3 directional = float3(g_directional, g_directional, g_directional) * dirFactor;
 
 	float shadowTerm = tex2D(shadowSampler, texCoord).r;
@@ -92,14 +94,16 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 		//return float4(1.0f, 0.0f, 0.0f, 1.0f);
 	}
 
-	return lightColor / 4.0f;
+	return lightColor / 4.0f;*/
+
+    return float4(ambient, 1.0f);
 }
 
 technique BaseDraw
 {
     pass Draw
     {
-        VertexShader = compile vs_3_0 VertexShaderFunction();
-        PixelShader = compile ps_3_0 PixelShaderFunction();
+        VertexShader = compile vs_4_0 VertexShaderFunction();
+        PixelShader = compile ps_4_0 PixelShaderFunction();
     }
 }

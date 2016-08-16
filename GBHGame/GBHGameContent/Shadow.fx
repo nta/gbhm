@@ -233,8 +233,8 @@ technique GenerateShadowMap
 		FillMode = Solid;
 		CullMode = CCW;
 		
-		VertexShader = compile vs_3_0 GenerateShadowMapVS();
-        PixelShader = compile ps_3_0 GenerateShadowMapPS();
+		VertexShader = compile vs_4_0 GenerateShadowMapVS();
+        PixelShader = compile ps_4_0 GenerateShadowMapPS();
 	}
 }
 
@@ -247,8 +247,8 @@ technique CreateShadowTerm2x2PCF
 		AlphaBlendEnable = false;
 		CullMode = NONE;
 
-        VertexShader = compile vs_3_0 ShadowTermVS();
-        PixelShader = compile ps_3_0 ShadowTermPS();	
+        VertexShader = compile vs_4_0 ShadowTermVS();
+        PixelShader = compile ps_4_0 ShadowTermPS();	
     }
 }
 

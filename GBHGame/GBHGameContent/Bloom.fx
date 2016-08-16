@@ -104,8 +104,8 @@ technique BloomHorz
 {
     pass Draw
     {
-        VertexShader = compile vs_3_0 VertexShaderFunction();
-        PixelShader = compile ps_3_0 BloomHorizontal();
+        VertexShader = compile vs_4_0 VertexShaderFunction();
+        PixelShader = compile ps_4_0 BloomHorizontal();
     }
 }
 
@@ -113,7 +113,7 @@ technique BloomVert
 {
     pass Draw
     {
-        VertexShader = compile vs_3_0 VertexShaderFunction();
-        PixelShader = compile ps_3_0 BloomVertical();
+        VertexShader = compile vs_4_0 VertexShaderFunction();
+        PixelShader = compile ps_4_0 BloomVertical();
     }
 }

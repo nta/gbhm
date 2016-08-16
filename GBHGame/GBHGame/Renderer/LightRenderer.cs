@@ -49,12 +49,15 @@ namespace GBH
 
         public static void RenderDirectionalLight(GraphicsDevice device, RenderTarget2D normalRT, RenderTarget2D depthRT, RenderTarget2D shadowRT)
         {
-            _dirAmbEffect.Parameters["HalfPixel"].SetValue(_halfPixel);
+            /*_dirAmbEffect.Parameters["HalfPixel"].SetValue(_halfPixel);
             _dirAmbEffect.Parameters["NormalMap"].SetValue(normalRT);
             //_dirAmbEffect.Parameters["DepthMap"].SetValue(depthRT);
             _dirAmbEffect.Parameters["ShadowMap"].SetValue(shadowRT);
             _dirAmbEffect.Parameters["InvertViewProjection"].SetValue(Matrix.Invert(Camera.MainCamera.ViewProjectionMatrix));
             _dirAmbEffect.Parameters["g_directional"].SetValue(r_sunIntensity.GetValue<float>());
+
+            _dirAmbEffect.CurrentTechnique.Passes[0].Apply();
+            DeferredRenderer.RenderFullScreenQuad(device);*/
 
             _dirAmbEffect.CurrentTechnique.Passes[0].Apply();
             DeferredRenderer.RenderFullScreenQuad(device);
@@ -127,8 +130,8 @@ namespace GBH
             _pointEffect.Techniques[0].Passes[0].Apply();
             device.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3);
 
-            device.BlendState = BlendState.Opaque;
-            device.DepthStencilState = DepthStencilState.Default;
+            device.BlendState = oldState;
+            device.DepthStencilState = oldDepth;
         }
 
         private static short[] _pointIndices = new short[36]

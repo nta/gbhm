@@ -40,7 +40,7 @@ namespace GBH
             _frustumCornersLS = new Vector3[8];
             _farFrustumCornersVS = new Vector3[4];
 
-            sm_enable = ConVar.Register("sm_enable", true, "Enable shadow mapping", ConVarFlags.Archived);
+            sm_enable = ConVar.Register("sm_enable", false, "Enable shadow mapping", ConVarFlags.Archived);
             sm_filterType = ConVar.Register("sm_filterType", 0, "Defines the filtering algorithm to use for shadow mapping", ConVarFlags.Archived);
         }
 

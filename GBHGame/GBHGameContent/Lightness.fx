@@ -77,8 +77,8 @@ technique CalculateLightness
 {
 	pass Draw
 	{
-		VertexShader = compile vs_3_0 VertexShaderFunction();
-        PixelShader = compile ps_3_0 LightnessPS();
+		VertexShader = compile vs_4_0 VertexShaderFunction();
+        PixelShader = compile ps_4_0 LightnessPS();
 	}
 }
 
@@ -86,8 +86,8 @@ technique DownsampleLightness
 {
 	pass Draw
 	{
-		VertexShader = compile vs_3_0 VertexShaderFunction();
-        PixelShader = compile ps_3_0 DownsamplePS();
+		VertexShader = compile vs_4_0 VertexShaderFunction();
+        PixelShader = compile ps_4_0 DownsamplePS();
 	}
 }
 
@@ -95,7 +95,7 @@ technique DownsampleLightnessFinalize
 {
 	pass Draw
 	{
-		VertexShader = compile vs_3_0 VertexShaderFunction();
-        PixelShader = compile ps_3_0 DownsamplePSFinal();
+		VertexShader = compile vs_4_0 VertexShaderFunction();
+        PixelShader = compile ps_4_0 DownsamplePSFinal();
 	}
 }

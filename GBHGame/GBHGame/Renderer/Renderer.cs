@@ -41,7 +41,7 @@ namespace GBH
         public static void Initialize(GraphicsDevice device)
         {
             // register convar
-            r_hdr_enable = ConVar.Register("r_hdr_enable", true, "Enable high dynamic range rendering.", ConVarFlags.Archived);
+            r_hdr_enable = ConVar.Register("r_hdr_enable", false, "Enable high dynamic range rendering.", ConVarFlags.Archived);
 
             // create render targets
             int width = device.PresentationParameters.BackBufferWidth;
@@ -131,7 +131,7 @@ namespace GBH
             LightRenderer.RenderDirectionalLight(device, _normalRT, _depthRT, _shadowRT);
 
             // render lights
-            //LightRenderer.RenderLights(device, _depthRT);
+            LightRenderer.RenderLights(device, _depthRT);
 
             //return;
 
