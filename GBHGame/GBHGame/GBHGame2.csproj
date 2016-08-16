@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{427CB06F-924D-41F0-89D4-E762E65E35AC}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GBH</RootNamespace>
+    <AssemblyName>GBHGame</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="3rdParty\DDSLib.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\BZip2\BitWriter.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\BZip2\BZip2Compressor.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\BZip2\BZip2InputStream.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\BZip2\BZip2OutputStream.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\BZip2\ParallelBZip2OutputStream.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\BZip2\Rand.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\CRC32.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ComHelper.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\EncryptionAlgorithm.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\Events.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\Exceptions.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ExtractExistingFileAction.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\FileSelector.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\OffsetStream.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\Shared.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\WinZipAes.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipConstants.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipCrypto.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipDirEntry.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipEntry.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipEntry.Extract.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipEntry.Read.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipEntry.Write.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipEntrySource.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipErrorAction.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipFile.AddUpdate.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipFile.Check.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipFile.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipFile.Events.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipFile.Extract.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipFile.Read.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipFile.Save.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipFile.SaveSelfExtractor.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipFile.Selector.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipFile.x-IEnumerable.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipInputStream.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipOutputStream.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zip\ZipSegmentedStream.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zlib\Deflate.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zlib\DeflateStream.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zlib\GZipStream.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zlib\Inflate.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zlib\InfTree.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zlib\ParallelDeflateOutputStream.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zlib\Tree.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zlib\Zlib.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zlib\ZlibBaseStream.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zlib\ZlibCodec.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zlib\ZlibConstants.cs" />
+    <Compile Include="3rdParty\Ionic.Zip\Zlib\ZlibStream.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\CollisionIsland.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\CollisionSystem.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\CollisionSystemBrute.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\CollisionSystemPersistentSAP.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\CollisionSystemSAP.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\DynamicTree.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\GJKCollide.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\IslandManager.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Octree.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Shapes\BoxShape.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Shapes\CapsuleShape.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Shapes\CompoundShape.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Shapes\ConeShape.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Shapes\ConvexHullShape.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Shapes\CylinderShape.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Shapes\MinkowskiSumShape.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Shapes\Multishape.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Shapes\Shape.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Shapes\SphereShape.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Shapes\TerrainShape.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\Shapes\TriangleMeshShape.cs" />
+    <Compile Include="3rdParty\Jitter\Collision\XenoCollide.cs" />
+    <Compile Include="3rdParty\Jitter\DataStructures\Hashset.cs" />
+    <Compile Include="3rdParty\Jitter\DataStructures\ReadOnlyHashset.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Arbiter.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\ArbiterMap.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Constraint.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Constraints\FixedAngle.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Constraints\PointOnLine.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Constraints\PointOnPoint.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Constraints\PointPointDistance.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Constraints\SingleBody\FixedAngle.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Constraints\SingleBody\PointOnLine.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Constraints\SingleBody\PointOnPoint.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Contact.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\IConstraint.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Joints\HingeJoint.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Joints\Joint.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Joints\PrismaticJoint.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\Material.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\RigidBody.cs" />
+    <Compile Include="3rdParty\Jitter\Dynamics\SoftBody.cs" />
+    <Compile Include="3rdParty\Jitter\IDebugDraw.cs" />
+    <Compile Include="3rdParty\Jitter\LinearMath\JBBox.cs" />
+    <Compile Include="3rdParty\Jitter\LinearMath\JConvexHull.cs" />
+    <Compile Include="3rdParty\Jitter\LinearMath\JMath.cs" />
+    <Compile Include="3rdParty\Jitter\LinearMath\JMatrix.cs" />
+    <Compile Include="3rdParty\Jitter\LinearMath\JQuaternion.cs" />
+    <Compile Include="3rdParty\Jitter\LinearMath\JVector.cs" />
+    <Compile Include="3rdParty\Jitter\ResourcePool.cs" />
+    <Compile Include="3rdParty\Jitter\ThreadManager.cs" />
+    <Compile Include="3rdParty\Jitter\World.cs" />
+    <Compile Include="Common\BitStream.cs" />
+    <Compile Include="Common\Command.cs" />
+    <Compile Include="Common\ConVar.cs" />
+    <Compile Include="Common\DeltaBitStream.cs" />
+    <Compile Include="Common\EventSystem.cs" />
+    <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Common\FileHeaders.cs" />
+    <Compile Include="Common\FileSystem.cs" />
+    <Compile Include="Common\FileSystem\DirectorySearchPath.cs" />
+    <Compile Include="Common\FileSystem\ISearchPath.cs" />
+    <Compile Include="Common\FileSystem\ZipSearchPath.cs" />
+    <Compile Include="Common\Log.cs" />
+    <Compile Include="Common\Logging\ConsoleLogListener.cs" />
+    <Compile Include="Common\Logging\FileLogListener.cs" />
+    <Compile Include="Common\Logging\GameLogListener.cs" />
+    <Compile Include="Common\Logging\ILogListener.cs" />
+    <Compile Include="Common\Logging\LogLevel.cs" />
+    <Compile Include="Common\NetChannel.cs" />
+    <Compile Include="Common\NetManager.cs" />
+    <Compile Include="Common\Tokenizer.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Game\Camera.cs" />
+    <Compile Include="Game\CellManager.cs" />
+    <Compile Include="Game\Client\Client.cs" />
+    <Compile Include="Game\Client\ClientInput.cs" />
+    <Compile Include="Game\Client\Snapshot.cs" />
+    <Compile Include="Game\Common\IniFunctions.cs" />
+    <Compile Include="Game\Common\PlayerMovement.cs" />
+    <Compile Include="Game\Common\UserCommand.cs" />
+    <Compile Include="Game\DebugCamera.cs" />
+    <Compile Include="Game\Entities\Entity.cs" />
+    <Compile Include="Game\Entities\PlayerEntity.cs" />
+    <Compile Include="Game\Server\Server.cs" />
+    <Compile Include="Game\MapGeometry.cs" />
+    <Compile Include="Game\MapManager.cs" />
+    <Compile Include="Game\Server\ServerClient.cs" />
+    <Compile Include="Game\StyleManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer\ConsoleRenderer.cs" />
+    <Compile Include="Renderer\EffectManager.cs" />
+    <Compile Include="Renderer\Font.cs" />
+    <Compile Include="Renderer\Fonts\ConsoleFont.cs" />
+    <Compile Include="Renderer\GameWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Renderer\ImageManager.cs" />
+    <Compile Include="Renderer\LightRenderer.cs" />
+    <Compile Include="Renderer\MaterialManager.cs" />
+    <Compile Include="Renderer\RenderEntity.cs" />
+    <Compile Include="Renderer\Renderer.cs" />
+    <Compile Include="Renderer\MapRenderer.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Renderer\RendererInit.cs" />
+    <Compile Include="Renderer\ShadowRenderer.cs" />
+    <Compile Include="System\Win32.cs" />
+    <Compile Include="Tools\GBHExport\ExportQMap.cs" />
+    <Compile Include="Tools\GBHFormats\Sty2Mat.cs" />
+    <Compile Include="XGame.cs" />
+    <Compile Include="Renderer\Renderer2D.cs" />
+    <Compile Include="Tools\GBHExport\ExportMap.cs" />
+    <Compile Include="Tools\GBHExport\ExportStyle.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.4.0.459, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\MonoGame.Framework.WindowsGL.3.4.0.459\lib\net40\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MonoGame.Framework.WindowsGL.3.4.0.459\lib\net40\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

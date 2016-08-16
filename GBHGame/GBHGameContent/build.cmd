@@ -1,0 +1,1 @@
+for %%g in (*.fx) do "%programfiles(x86)%\MSBuild\MonoGame\v3.0\Tools\2MGFX.exe" %%g ..\..\Bin\Data\Effects\%%~ng_d3d /debug /profile:opengl
