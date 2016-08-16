@@ -14,8 +14,11 @@ namespace GBH
         {
             this.ClientSize = new System.Drawing.Size(1280, 720);
             this.Text = "GBH2";
-            this.FormBorderStyle = FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = FormBorderStyle.Sizable;
             this.MaximizeBox = false;
+            this.MinimumSize = new Size(10, 40); // so it doesn't become 0px
+
+            this.Resize += (s, e) => Resized?.Invoke(this.ClientSize);
 
             UpdateFullscreenMode(_vid_fullscreen.GetValue<bool>());
 
@@ -24,7 +27,7 @@ namespace GBH
 
         private void UpdateFullscreenMode(bool isFullScreen)
         {
-            this.FormBorderStyle = (isFullScreen) ? FormBorderStyle.None : FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = (isFullScreen) ? FormBorderStyle.None : FormBorderStyle.Sizable;
 
             if (isFullScreen)
             {

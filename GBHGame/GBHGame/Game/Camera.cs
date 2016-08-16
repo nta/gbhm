@@ -24,6 +24,8 @@ namespace GBH
             MainCamera = new PerspectiveCamera(MathHelper.ToRadians(30.0f), 1280f / 720f, 1.0f, 50.0f);
             MainCamera.Position = new Vector3(72.0f, -190.0f, 12.0f);
 
+            GameWindow.Resized += (size) => MainCamera.AspectRatio = size.Width / (float)size.Height;
+
             FOV = ConVar.Register("FOV", 30.0f, "The field of view in degrees", ConVarFlags.Cheat);
 
             // TODO: dynamically obtain aspect ratio/FOV
