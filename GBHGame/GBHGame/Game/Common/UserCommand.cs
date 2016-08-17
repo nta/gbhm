@@ -11,7 +11,8 @@ namespace GBH
         Forward = 1,
         Backward = 2,
         RotateLeft = 4,
-        RotateRight = 8
+        RotateRight = 8,
+        Shoot = 16
     }
 
     public struct UserCommand

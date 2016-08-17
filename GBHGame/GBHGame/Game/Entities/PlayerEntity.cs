@@ -13,6 +13,8 @@ namespace GBH
         public uint LastCommandTime { get; set; }
         public float VelocityZ { get; set; } // for gravity
 
+        private bool ShootPressed { get; set; }
+
         public override int TypeCode
         {
             get
@@ -81,6 +83,24 @@ namespace GBH
 
             // TODO: don't just use the server's physics world
             PlayerMovement.Process(this, command, Server.PhysicsWorld);
+
+            if (command.TestButton(ClientButtons.Shoot))
+            {
+                if (!ShootPressed)
+                {
+                    var bullet = Server.SpawnEntity<BulletEntity>();
+                    bullet.Position = Position;
+                    bullet.Rotation = Rotation;
+                    bullet.Speed = 0.5f;
+                    bullet.Direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(Rotation.Z + 90.0f)), (float)Math.Sin(MathHelper.ToRadians(Rotation.Z + 90.0f)));
+                }
+
+                ShootPressed = true;
+            }
+            else
+            {
+                ShootPressed = false;
+            }
         }
 
         public override void ClientProcess()
@@ -100,7 +120,8 @@ namespace GBH
                 Position = Position,
                 Rotation = Rotation,
                 SpawnKey = SpawnKey,
-                LastCommandTime = LastCommandTime
+                LastCommandTime = LastCommandTime,
+                ShootPressed = ShootPressed
             };
         }
     }

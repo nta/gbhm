@@ -60,6 +60,8 @@ namespace GBH
             {
                 case 0:
                     return new PlayerEntity();
+                case 1:
+                    return new BulletEntity();
                 default:
                     return null;
             }

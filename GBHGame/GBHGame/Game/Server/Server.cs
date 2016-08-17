@@ -51,6 +51,14 @@ namespace GBH
             }
         }
 
+        public static float DeltaTime
+        {
+            get
+            {
+                return (50.0f / 1000.0f); // if sv fps is fixed this is fixed too?
+            }
+        }
+
         public static int EntitySpawnKey { get; set; }
 
         /// <summary>
@@ -232,6 +240,25 @@ namespace GBH
             }
         }
 
+        public static TEntity SpawnEntity<TEntity>() where TEntity : Entity, new()
+        {
+            var entity = new TEntity();
+            
+            for (int i = 32 /* replace this with max clients or so */; i < Entities.Length; i++)
+            {
+                if (Entities[i] == null)
+                {
+                    Entities[i] = entity;
+                    break;
+                }
+            }
+
+            entity.SpawnKey = EntitySpawnKey++;
+            entity.Spawn();
+
+            return entity;
+        }
+
         /// <summary>
         /// Per-server-frame processing function.
         /// </summary>
@@ -239,10 +266,27 @@ namespace GBH
         {
             //Log.Write(LogLevel.Info, "We are your genetic destiny.");
             // send snapshots to clients
+            ProcessEntities();
             DropDrownedClients();
             SendSnapshots();
             CleanZombies();
             CheckForTimeouts();
+        }
+
+        private static void ProcessEntities()
+        {
+            if (Entities == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < Entities.Length; i++)
+            {
+                if (Entities[i] != null && !(Entities[i] is PlayerEntity))
+                {
+                    Entities[i].Think();
+                }
+            }
         }
 
         private static void DropDrownedClients()

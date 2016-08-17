@@ -170,6 +170,7 @@
     <Compile Include="Game\Common\PlayerMovement.cs" />
     <Compile Include="Game\Common\UserCommand.cs" />
     <Compile Include="Game\DebugCamera.cs" />
+    <Compile Include="Game\Entities\BulletEntity.cs" />
     <Compile Include="Game\Entities\Entity.cs" />
     <Compile Include="Game\Entities\PlayerEntity.cs" />
     <Compile Include="Game\Server\Server.cs" />

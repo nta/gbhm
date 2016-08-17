@@ -17,7 +17,8 @@ namespace GBH
         private static bool _rightKey;
         private static bool _upKey;
         private static bool _downKey;
-        
+        private static bool _shootKey;
+
         public static void CreateCommand()
         {
             var command = new UserCommand();
@@ -41,6 +42,11 @@ namespace GBH
             if (_rightKey)
             {
                 command.Buttons |= ClientButtons.RotateRight;
+            }
+
+            if (_shootKey)
+            {
+                command.Buttons |= ClientButtons.Shoot;
             }
 
             _userCommands.Enqueue(command);
@@ -110,6 +116,11 @@ namespace GBH
             if (key == Keys.Down)
             {
                 _downKey = down;
+            }
+
+            if (key == Keys.Space)
+            {
+                _shootKey = down;
             }
         }
     }
