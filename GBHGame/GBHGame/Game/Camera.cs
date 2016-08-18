@@ -101,6 +101,18 @@ namespace GBH
             viewProjMatrix = this.viewProjMatrix;
         }
 
+        public static Vector2 WorldToScreen(Vector3 position)
+        {
+            var viewProjection = Camera.MainCamera.ViewMatrix * Camera.MainCamera.ProjectionMatrix;
+            var clipSpaceVector = Vector4.Transform(position, viewProjection);
+
+            float wi = 1.0f / clipSpaceVector.W;
+            var x = clipSpaceVector.X * wi;
+            var y = clipSpaceVector.Y * wi;
+
+            return new Vector2(((x + 1f) / 2f) * GameWindow.ViewportSize.Width, ((y - 1f) / -2f) * GameWindow.ViewportSize.Height);
+        }
+
         public Matrix WorldMatrix
         {
             get { return worldMatrix; }

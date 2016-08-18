@@ -13,6 +13,13 @@ namespace GBH
         public uint LastCommandTime { get; set; }
         public float VelocityZ { get; set; } // for gravity
         public ServerClient Client { get; set; }
+        public string Name { get; set; }
+
+        public PlayerEntity()
+            : base()
+        {
+            Name = "";
+        }
 
         private bool ShootPressed { get; set; }
 
@@ -38,6 +45,7 @@ namespace GBH
         {
             LastCommandTime = message.ReadUInt32();
             VelocityZ = message.ReadSingle();
+            Name = message.ReadString();
 
             base.Deserialize(message);
         }
@@ -47,6 +55,7 @@ namespace GBH
             // FIXME: maybe this should not be replicated for every entity?
             message.WriteUInt32(LastCommandTime);
             message.WriteSingle(VelocityZ);
+            message.WriteString(Name);
 
             base.Serialize(message);
         }
@@ -72,6 +81,11 @@ namespace GBH
 
         public override void Think()
         {
+            if (Client != null)
+            {
+                Name = Client.Name;
+            }
+
             var command = Command;
 
             if (command.ServerTime < (Server.Time - 1000))
@@ -135,7 +149,8 @@ namespace GBH
                 Rotation = Rotation,
                 SpawnKey = SpawnKey,
                 LastCommandTime = LastCommandTime,
-                ShootPressed = ShootPressed
+                ShootPressed = ShootPressed,
+                Name = Name
             };
         }
     }

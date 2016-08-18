@@ -61,6 +61,20 @@ namespace GBH
             FontManager.SetFont(FontStyle.Console);
             FontManager.PrintString(new Vector2(5f, 5f), string.Format("Position: ({0}, {1}, {2})", Camera.MainCamera.Position.X, Camera.MainCamera.Position.Y, Camera.MainCamera.Position.Z - 10.0f));
             FontManager.PrintString(new Vector2(5f, GameWindow.ViewportSize.Height - 12f - 5f), string.Format("Client state: {0}", Client.State));
+
+            if (Client.Snapshot != null)
+            {
+                for (int i = 0; i < 32; i++)
+                {
+                    var entity = Client.Snapshot.Entities[i] as PlayerEntity;
+
+                    if (entity != null)
+                    {
+                        float offsetPixels = (FontManager.MeasureString(entity.Name) / 2.0f);
+                        FontManager.PrintString(Camera.WorldToScreen(entity.Position) + new Vector2(- offsetPixels, - 50.0f), entity.Name);
+                    }
+                }
+            }
         }
 
         public static void HandleKey(Keys key, bool down)

@@ -638,6 +638,14 @@ namespace GBH
                     break;
             }
         }
+        
+        public static Snapshot Snapshot
+        {
+            get
+            {
+                return _snap;
+            }
+        }
 
         public static int ClientNum
         {
