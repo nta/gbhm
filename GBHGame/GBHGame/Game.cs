@@ -39,6 +39,11 @@ namespace GBH
 
             ConVar.Initialize();
             FileSystem.Initialize();
+            
+            // exec config a tad earlier
+            Command.ExecuteNow("exec config.cfg");
+            Command.ExecuteBuffer();
+
             Win32System.Initialize();
             MapGeometry.Initialize();
             //StyleManager.Load("Styles/bil.sty");
@@ -68,8 +73,6 @@ namespace GBH
             MapRenderer.Initialize(Renderer.Device);
             DeferredRenderer.Initialize(Renderer.Device);
             Renderer2D.Initialize(Renderer.Device);
-
-            Command.ExecuteNow("exec config.cfg");
         }
 
         private static uint _lastTime;
