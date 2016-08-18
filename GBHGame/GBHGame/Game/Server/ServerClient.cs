@@ -38,6 +38,7 @@ namespace GBH
             EntityBases = new ServerClientEntityBase[Server.Entities.Length];
 
             Entity = new PlayerEntity();
+            Entity.Client = this;
             Server.Entities[ClientNum] = Entity;
 
             Entity.SpawnKey = Server.EntitySpawnKey++;

@@ -39,6 +39,19 @@ namespace GBH
             message.WriteInt16((short)(Rotation.Z * 10));
         }
 
+        protected void Destroy()
+        {
+            // TODO: make this more popper
+            for (int i = 0; i < Server.Entities.Length; i++)
+            {
+                if (Server.Entities[i] == this)
+                {
+                    Server.Entities[i] = null;
+                    return;
+                }
+            }
+        }
+
         // client-side only
         public abstract void ClientProcess();
         public abstract RenderEntity GetRenderEntity();

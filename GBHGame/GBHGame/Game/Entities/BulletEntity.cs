@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Jitter.Dynamics;
+using Jitter.LinearMath;
 
 namespace GBH
 {
@@ -11,6 +13,7 @@ namespace GBH
     {        
         public float Speed { get; set; }
         public Vector2 Direction { get; set; }
+        public PlayerEntity Shooter { get; set; }
 
         public override int TypeCode
         {
@@ -56,7 +59,48 @@ namespace GBH
 
         public override void Think()
         {
-            Position += new Vector3(Direction * Speed * Server.DeltaTime, 0.0f);
+            // test if we hit a wall
+            var thisMove = new Vector3(Direction * Speed * Server.DeltaTime, 0.0f);
+
+            RigidBody outBody;
+            JVector outNormal;
+            float fraction;
+
+            Server.PhysicsWorld.CollisionSystem.Raycast(Position.ToJVector(), thisMove.ToJVector(), null, out outBody, out outNormal, out fraction);
+
+            if (fraction <= 1.0f)
+            {
+                // yes we hit a wall
+                var hitPosition = Position + (thisMove * fraction);
+
+                Server.SendReliableCommand(null, "print \"{0} shot a wall.\"", Shooter.Client.Name);
+
+                // TODO: play effect on wall on client somehow (this is server so we need client events?)
+
+                // destroy ourselves
+                Destroy();
+            }
+
+            for (int i = 0; i < 32; i++)
+            {
+                var entity = Server.Entities[i] as PlayerEntity;
+
+                if (entity != null)
+                {
+                    if ((entity.Position - Position).Length() < 0.3f)
+                    {
+                        if (entity != Shooter)
+                        {
+                            Server.SendReliableCommand(null, "print \"{0} shot an {1}\"", Shooter.Client.Name, entity.Client.Name);
+
+                            entity.Spawn();
+                            Destroy();
+                        }
+                    }
+                }
+            }
+
+            Position += thisMove;
         }
 
         public override void ClientProcess()

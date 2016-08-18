@@ -12,6 +12,7 @@ namespace GBH
         public UserCommand Command { get; set; }
         public uint LastCommandTime { get; set; }
         public float VelocityZ { get; set; } // for gravity
+        public ServerClient Client { get; set; }
 
         private bool ShootPressed { get; set; }
 
@@ -92,6 +93,7 @@ namespace GBH
                     bullet.Position = Position;
                     bullet.Rotation = Rotation;
                     bullet.Speed = 0.5f;
+                    bullet.Shooter = this;
                     bullet.Direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(Rotation.Z + 90.0f)), (float)Math.Sin(MathHelper.ToRadians(Rotation.Z + 90.0f)));
                 }
 
