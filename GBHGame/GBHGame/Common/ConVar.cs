@@ -212,6 +212,8 @@ namespace GBH
             }
         }
 
+        public event Action Modified;
+
         public T GetValue<T>()
         {
             try
@@ -282,6 +284,11 @@ namespace GBH
                 }
 
                 _modifiedFlag |= Flags;
+
+                if (!force)
+                {
+                    Modified?.Invoke();
+                }
             }
             catch (FormatException)
             {
