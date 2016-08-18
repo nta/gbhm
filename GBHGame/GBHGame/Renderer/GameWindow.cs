@@ -12,15 +12,38 @@ namespace GBH
     {
         public GameWindow()
         {
-            this.ClientSize = new System.Drawing.Size(1280, 720);
             this.Text = "Grevious Bodily Harm";
             this.FormBorderStyle = FormBorderStyle.Sizable;
             this.MaximizeBox = false;
             this.MinimumSize = new Size(10, 40); // so it doesn't become 0px
+            this.StartPosition = FormStartPosition.Manual;
 
-            this.Resize += (s, e) => Resized?.Invoke(this.ClientSize);
+            this.Resize += (s, e) => {
+                Resized?.Invoke(this.ClientSize);
+                _vid_width.SetValue<int>(this.ClientSize.Width, true);
+                _vid_height.SetValue<int>(this.ClientSize.Height, true);
+            };
+
+            this.Move += (s, e) =>
+            {
+                _vid_xpos.SetValue<int>(this.Location.X, true);
+                _vid_ypos.SetValue<int>(this.Location.Y, true);
+            };
 
             UpdateFullscreenMode(_vid_fullscreen.GetValue<bool>());
+
+            _vid_width.Modified += () => {
+                this.ClientSize = new Size(_vid_width.GetValue<int>(), this.ClientSize.Height);
+                Resized?.Invoke(this.ClientSize);
+            };
+
+            _vid_height.Modified += () => {
+                this.ClientSize = new Size(this.ClientSize.Width, _vid_height.GetValue<int>());
+                Resized?.Invoke(this.ClientSize);
+            };
+
+            _vid_xpos.Modified += () => this.Location = new Point(_vid_xpos.GetValue<int>(), _vid_ypos.GetValue<int>());
+            _vid_ypos.Modified += () => this.Location = new Point(_vid_xpos.GetValue<int>(), _vid_ypos.GetValue<int>());
 
             this.Show();
         }
@@ -37,8 +60,8 @@ namespace GBH
             }
             else
             {
-                this.ClientSize = new System.Drawing.Size(1280, 720);
-                this.Location = new Point(10, 10);
+                this.ClientSize = new System.Drawing.Size(_vid_width.GetValue<int>(), _vid_height.GetValue<int>());
+                this.Location = new Point(_vid_xpos.GetValue<int>(), _vid_ypos.GetValue<int>());
             }
 
             Resized?.Invoke(this.ClientSize);
@@ -73,6 +96,10 @@ namespace GBH
         private static GameWindow _gw;
 
         private static ConVar _vid_fullscreen;
+        private static ConVar _vid_xpos;
+        private static ConVar _vid_ypos;
+        private static ConVar _vid_width;
+        private static ConVar _vid_height;
         private static bool? _lastFullscreenValue;
 
         public static event Action<Size> Resized;
@@ -88,6 +115,10 @@ namespace GBH
         public static void Initialize()
         {
             _vid_fullscreen = ConVar.Register<bool>("vid_fullscreen", false, "Fullscreen mode enabled?", ConVarFlags.Archived);
+            _vid_xpos = ConVar.Register<int>("vid_xpos", 20, "X position on screen", ConVarFlags.Archived);
+            _vid_ypos = ConVar.Register<int>("vid_ypos", 20, "Y position on screen", ConVarFlags.Archived);
+            _vid_width = ConVar.Register<int>("vid_width", 1280, "Game window width", ConVarFlags.Archived);
+            _vid_height = ConVar.Register<int>("vid_height", 720, "Game window height", ConVarFlags.Archived);
             _gw = new GameWindow();
         }
 
