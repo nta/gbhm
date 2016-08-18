@@ -44,8 +44,6 @@ namespace GBH
             Resized?.Invoke(this.ClientSize);
         }
 
-        private IntPtr hIMC;
-
         protected override void WndProc(ref Message m)
         {
             switch ((Win32.WindowsMessage)m.Msg)
