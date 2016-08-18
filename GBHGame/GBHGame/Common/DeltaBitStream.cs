@@ -152,6 +152,21 @@ namespace GBH
                 _bitStream.WriteSingle(value);
             }
         }
+
+        public void WriteString(string value)
+        {
+            _newBaseStream.WriteString(value);
+
+            if (_baseStream != null && value == _baseStream.ReadString())
+            {
+                _bitStream.WriteBool(false);
+            }
+            else
+            {
+                _bitStream.WriteBool(true);
+                _bitStream.WriteString(value);
+            }
+        }
         #endregion
 
         #region readers
@@ -257,6 +272,20 @@ namespace GBH
             }
             
             _newBaseStream.WriteSingle(value);
+
+            return value;
+        }
+
+        public string ReadString()
+        {
+            string value = (_baseStream == null) ? string.Empty : _baseStream.ReadString();
+
+            if (_bitStream.ReadBool())
+            {
+                value = _bitStream.ReadString();
+            }
+
+            _newBaseStream.WriteString(value);
 
             return value;
         }
