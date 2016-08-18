@@ -92,7 +92,7 @@ namespace GBH
                     var bullet = Server.SpawnEntity<BulletEntity>();
                     bullet.Position = Position;
                     bullet.Rotation = Rotation;
-                    bullet.Speed = 0.5f;
+                    bullet.Speed = 2.0f;
                     bullet.Shooter = this;
                     bullet.Direction = new Vector2((float)Math.Cos(MathHelper.ToRadians(Rotation.Z + 90.0f)), (float)Math.Sin(MathHelper.ToRadians(Rotation.Z + 90.0f)));
                 }
