@@ -59,6 +59,35 @@ namespace GBH
                 Environment.Exit(1);
             }
 
+            if (args[0] == "seta")
+            {
+                if (args.Length == 3)
+                {
+                    ConVar.SetValue(args[1], args[2]).Flags |= ConVarFlags.Archived;
+                }
+            }
+
+            if (args[0] == "exec")
+            {
+                if (args.Length == 2)
+                {
+                    // inline for now, also not fs yet
+                    try
+                    {
+                        Log.Write(LogLevel.Info, $"Executing {args[1]}.");
+
+                        using (StreamReader file = File.OpenText(args[1]))
+                        {
+                            AddToBuffer(file.ReadToEnd() + "\n");
+                        }
+                    }
+                    catch
+                    {
+                        Log.Write(LogLevel.Warning, $"Couldn't execute {args[1]}.");
+                    }
+                }
+            }
+
             // status command, mmk?
             if (args[0] == "status")
             {
@@ -79,21 +108,6 @@ namespace GBH
             if (args[0] == "clear")
             {
                 Client.ClearConsole();
-            }
-
-            // isn't this an odd place to do it
-            if (args[0] == "nickname")
-            {
-                // TODO: Introduce a config saving system based on the quake one.
-                if (args[1].Length > 18)
-                {
-                    Log.Write(LogLevel.Error, "Your nickname is to long.");
-                    return;
-                }
-                ConVar.SetValue<string>("nicknamee", args[1]);
-                var path = Directory.GetCurrentDirectory() + "\\config.ini";
-                IniFile ini = new IniFile(path);
-                ini.IniWriteValue("CONFIG", "nickname", args[1]);
             }
 
             if (args[0] == "kill")
@@ -132,8 +146,7 @@ namespace GBH
                         return args;
                     }
 
-                    // hopefully this will fix some errors
-                    if (i == 0)
+                    if (text.Length < 2)
                     {
                         break;
                     }

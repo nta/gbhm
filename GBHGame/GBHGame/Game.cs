@@ -68,20 +68,8 @@ namespace GBH
             MapRenderer.Initialize(Renderer.Device);
             DeferredRenderer.Initialize(Renderer.Device);
             Renderer2D.Initialize(Renderer.Device);
-            
-            // jeez, people these days just need to get a *proper* nickname
-            if (ConVar.GetValue<string>("nicknamee") == Environment.GetEnvironmentVariable("username"))
-            {
-                Log.Write(LogLevel.Info, "It looks it's your first time running GBH2. Please type 'nickname <WANTED NICKNAME>' to set your nickname.");
-            }
 
-            var path = Directory.GetCurrentDirectory() + "\\config.ini";
-            IniFile ini = new IniFile(path);
-            var value = ini.IniReadValue("CONFIG", "nickname");
-            if (value != null)
-            {
-                ConVar.SetValue<string>("nicknamee", value);
-            }
+            Command.ExecuteNow("exec config.cfg");
         }
 
         private static uint _lastTime;
@@ -127,6 +115,9 @@ namespace GBH
 
             // game window events
             GameWindow.Process();
+
+            // handle convar system
+            ConVar.Process();
 
             // process the command buffer
             Command.ExecuteBuffer();

@@ -272,11 +272,6 @@ namespace GBH
 
         public static void Connect_f(string[] args)
         {
-            if (ConVar.GetValue<string>("nicknamee") == ("")) // baddd
-            {
-                Log.Write(LogLevel.Info, "You haven't set a nickname, set one now:)");
-                return;
-            }
             if (args.Length != 2)
             {
                 Log.Write(LogLevel.Info, "usage: connect [ip]");
@@ -315,9 +310,7 @@ namespace GBH
                 case ClientState.Connecting:
                     if ((_clientTime - _lastConnectPacketTime) > 2000)
                     {
-                        // TODO: use a proper nickname here
-                        // TODO: make nickname changes *dynamic* :o
-                        var nicknameToUse = ConVar.GetValue<string>("nicknamee");
+                        var nicknameToUse = ConVar.GetValue<string>("nickname");
                         NetManager.SendOOBPacket(NetChannelType.ClientToServer, _currentServer, "connect {0} \"{1}\"", _challenge, nicknameToUse);
                         _lastConnectPacketTime = (int)_clientTime;
                     }
