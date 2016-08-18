@@ -13,7 +13,7 @@ namespace GBH
         public GameWindow()
         {
             this.ClientSize = new System.Drawing.Size(1280, 720);
-            this.Text = "GBH2";
+            this.Text = "Grevious Bodily Harm";
             this.FormBorderStyle = FormBorderStyle.Sizable;
             this.MaximizeBox = false;
             this.MinimumSize = new Size(10, 40); // so it doesn't become 0px
