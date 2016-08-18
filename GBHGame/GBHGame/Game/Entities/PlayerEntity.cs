@@ -53,7 +53,19 @@ namespace GBH
 
         public override void Spawn()
         {
-            Position = new Vector3(72.0f, -190.0f, 2.01f);
+            Vector3[] spawnLocations = new[] { new Vector3(72.0f, -190.0f, 2.01f),
+                                               new Vector3(70.44f, -188.55f, 2.01f),
+                                               new Vector3(67.49f, -188.44f, 2.01f),
+                                               new Vector3(67.27f, -190.29f, 2.01f),
+                                               new Vector3(72.48f, -189.87f, 2.01f),
+                                               new Vector3(76.80f, -189.74f, 2.46f),
+                                               new Vector3(68.70f, -190.96f, 2.01f)
+                                            };
+
+            Random rnd = new Random();
+            int id = rnd.Next(spawnLocations.Count());
+
+            Position = new Vector3(spawnLocations[id].X, spawnLocations[id].Y, spawnLocations[id].Z);
             Rotation = new Vector3(0f, 0f, 0f);
             VelocityZ = 0f;
         }
