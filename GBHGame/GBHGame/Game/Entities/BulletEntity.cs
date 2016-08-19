@@ -73,7 +73,7 @@ namespace GBH
                 // yes we hit a wall
                 var hitPosition = Position + (thisMove * fraction);
 
-                Server.SendReliableCommand(null, "print \"{0} shot a wall.\"", Shooter.Client.Name);
+                //Server.SendReliableCommand(null, "print \"{0} shot a wall.\"", Shooter.Client.Name);
 
                 // TODO: play effect on wall on client somehow (this is server so we need client events?)
 
