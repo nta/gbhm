@@ -167,7 +167,6 @@
     <Compile Include="Game\Client\Client.cs" />
     <Compile Include="Game\Client\ClientInput.cs" />
     <Compile Include="Game\Client\Snapshot.cs" />
-    <Compile Include="Game\Common\IniFunctions.cs" />
     <Compile Include="Game\Common\PlayerMovement.cs" />
     <Compile Include="Game\Common\UserCommand.cs" />
     <Compile Include="Game\DebugCamera.cs" />
