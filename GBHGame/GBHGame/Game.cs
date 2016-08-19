@@ -65,6 +65,7 @@ namespace GBH
             mapname = ConVar.Register("mapname", "", "Current mapname", ConVarFlags.ReadOnly);
             nickname = ConVar.Register("nickname", Environment.GetEnvironmentVariable("username"), "Your nickname", ConVarFlags.Archived);
 
+            AudioManager.Initialize();
             Renderer.Initialize();
             MaterialManager.ReadMaterialFile("base.material");
             MaterialManager.ReadMaterialFile("Styles/bil.material");

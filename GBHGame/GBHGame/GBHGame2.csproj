@@ -164,6 +164,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Game\Camera.cs" />
     <Compile Include="Game\CellManager.cs" />
+    <Compile Include="Game\Client\AudioManager.cs" />
     <Compile Include="Game\Client\Client.cs" />
     <Compile Include="Game\Client\ClientInput.cs" />
     <Compile Include="Game\Client\Snapshot.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Game\Entities\Entity.cs" />
     <Compile Include="Game\Entities\EventEntity.cs" />
     <Compile Include="Game\Entities\PlayerEntity.cs" />
+    <Compile Include="Game\Events\SoundEvent.cs" />
     <Compile Include="Game\Events\EventTypeManager.cs" />
     <Compile Include="Game\Events\GameEvent.cs" />
     <Compile Include="Game\Events\TestGameEvent.cs" />
@@ -208,6 +210,10 @@
     <Compile Include="Tools\GBHExport\ExportStyle.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CSCore, Version=1.1.5992.18249, Culture=neutral, PublicKeyToken=5a08f2b6f4415dea, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CSCore.1.1.0\lib\net35-client\CSCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MonoGame.Framework, Version=3.5.1.1679, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
       <Private>True</Private>
