@@ -61,3 +61,11 @@ various variables that can be used. The variables are pretty straight-forward:
 
 more to come...
 
+# TODO
+
+- [ ] libcef UI framework
+- [ ] server-side resources
+- [ ] python scripting framework
+- [ ] ai implementation
+- [ ] proper linux support
+
