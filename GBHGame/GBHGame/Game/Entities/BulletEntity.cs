@@ -76,8 +76,8 @@ namespace GBH
                 //Server.SendReliableCommand(null, "print \"{0} shot a wall.\"", Shooter.Client.Name);
 
                 // TODO: play effect on wall on client somehow (this is server so we need client events?)
-                var testEvent = new TestGameEvent() { TestString = "pew" };
-                EventEntity.Create(Position, testEvent);
+                var soundEvent = new SoundEvent() { SoundString = "Audio/collision.wav" };
+                EventEntity.Create(Position, soundEvent);
 
                 // destroy ourselves
                 Destroy();

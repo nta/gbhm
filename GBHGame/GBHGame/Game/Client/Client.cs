@@ -421,6 +421,9 @@ namespace GBH
             if (State == ClientState.Connected)
             {
                 State = ClientState.Ingame;
+
+                // TODO: move this out maybey?
+                AudioManager.PlayRepeat("Audio/amb_mountain_noanml_day0v1_lr.mp3", Vector3.Zero);
             }
 
             var snapshot = new Snapshot();
