@@ -436,12 +436,12 @@ namespace GBH
                 // write the entity number
                 message.WriteInt32(i, 12);
 
-                var entityBase = (useDelta) ? ((client.EntityBases[i] != null) ? client.EntityBases[i].Get() : null) : null;
+                // write the spawn key
+                message.WriteInt32(entity.SpawnKey, 20);
+
+                var entityBase = (useDelta) ? ((client.EntityBases[i] != null) ? client.EntityBases[i].Get(entity.SpawnKey) : null) : null;
 
                 var deltaMessage = new DeltaBitStream(entityBase, message);
-
-                // write the spawn key
-                deltaMessage.WriteInt32(entity.SpawnKey, 20);
 
                 // write the type code
                 deltaMessage.WriteInt32(entity.TypeCode, 4);
@@ -450,9 +450,9 @@ namespace GBH
                 entity.Serialize(deltaMessage);
 
                 // set the new base
-                if (client.EntityBases[i] == null)
+                if (client.EntityBases[i] == null || entityBase == null) // FIXME: ? checking if null base is terribly silly if anyone has packet loss
                 {
-                    client.EntityBases[i] = new ServerClientEntityBase(client);
+                    client.EntityBases[i] = new ServerClientEntityBase(client, entity.SpawnKey);
                 }
 
                 client.EntityBases[i].Set(deltaMessage.NewBase);

@@ -153,11 +153,14 @@ namespace GBH
             }
         }
 
-        public void WriteString(string value)
+        public void WriteString(string value, int maxLength)
         {
-            _newBaseStream.WriteString(value);
+            var paddedString = new byte[maxLength];
+            Encoding.UTF8.GetBytes(value, 0, value.Length, paddedString, 0);
 
-            if (_baseStream != null && value == _baseStream.ReadString())
+            _newBaseStream.WriteBytes(paddedString);
+
+            if (_baseStream != null && value == Encoding.UTF8.GetString(_baseStream.ReadBits(maxLength * 8)).TrimEnd('\0'))
             {
                 _bitStream.WriteBool(false);
             }
@@ -276,16 +279,19 @@ namespace GBH
             return value;
         }
 
-        public string ReadString()
+        public string ReadString(int maxLength)
         {
-            string value = (_baseStream == null) ? string.Empty : _baseStream.ReadString();
+            string value = (_baseStream == null) ? string.Empty : Encoding.UTF8.GetString(_baseStream.ReadBits(maxLength * 8)).TrimEnd('\0');
 
             if (_bitStream.ReadBool())
             {
                 value = _bitStream.ReadString();
             }
 
-            _newBaseStream.WriteString(value);
+            var paddedString = new byte[maxLength];
+            Encoding.UTF8.GetBytes(value, 0, value.Length, paddedString, 0);
+
+            _newBaseStream.WriteBytes(paddedString);
 
             return value;
         }

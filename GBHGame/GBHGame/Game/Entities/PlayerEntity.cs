@@ -45,7 +45,7 @@ namespace GBH
         {
             LastCommandTime = message.ReadUInt32();
             VelocityZ = message.ReadSingle();
-            Name = message.ReadString();
+            Name = message.ReadString(64);
 
             base.Deserialize(message);
         }
@@ -55,7 +55,7 @@ namespace GBH
             // FIXME: maybe this should not be replicated for every entity?
             message.WriteUInt32(LastCommandTime);
             message.WriteSingle(VelocityZ);
-            message.WriteString(Name);
+            message.WriteString(Name, 64);
 
             base.Serialize(message);
         }

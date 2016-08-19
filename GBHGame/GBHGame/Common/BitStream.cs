@@ -76,7 +76,7 @@ namespace GBH
             short length = ReadInt16();
             byte[] bytes = ReadBits(length * 8);
 
-            return Encoding.UTF8.GetString(bytes).TrimEnd('\0'); // trim off any \0 characters that might be due to the array being padded to 4 length
+            return Encoding.UTF8.GetString(bytes).TrimEnd('\0');
         }
         #endregion
 

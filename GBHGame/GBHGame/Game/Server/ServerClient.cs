@@ -94,15 +94,22 @@ namespace GBH
     {
         private ServerClient _client;
         private BitStream[] _bases;
+        private int _spawnKey;
 
-        internal ServerClientEntityBase(ServerClient client)
+        internal ServerClientEntityBase(ServerClient client, int spawnKey)
         {
             _client = client;
             _bases = new BitStream[32];
+            _spawnKey = spawnKey;
         }
 
-        public BitStream Get()
+        public BitStream Get(int spawnKey)
         {
+            if (_spawnKey != spawnKey)
+            {
+                return null;
+            }
+
             // FIXME: might go bad if we're more than 32 packets behind?
             return _bases[_client.LastAcknowledgedMessage % _bases.Length];
         }

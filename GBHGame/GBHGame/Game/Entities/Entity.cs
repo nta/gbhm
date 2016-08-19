@@ -75,6 +75,8 @@ namespace GBH
                     return new PlayerEntity();
                 case 1:
                     return new BulletEntity();
+                case 2:
+                    return new EventEntity();
                 default:
                     return null;
             }

@@ -172,7 +172,11 @@
     <Compile Include="Game\DebugCamera.cs" />
     <Compile Include="Game\Entities\BulletEntity.cs" />
     <Compile Include="Game\Entities\Entity.cs" />
+    <Compile Include="Game\Entities\EventEntity.cs" />
     <Compile Include="Game\Entities\PlayerEntity.cs" />
+    <Compile Include="Game\Events\EventTypeManager.cs" />
+    <Compile Include="Game\Events\GameEvent.cs" />
+    <Compile Include="Game\Events\TestGameEvent.cs" />
     <Compile Include="Game\Server\Server.cs" />
     <Compile Include="Game\MapGeometry.cs" />
     <Compile Include="Game\MapManager.cs" />

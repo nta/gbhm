@@ -63,6 +63,7 @@ namespace GBH
         private static void InitializeConnection()
         {
             _entityBases = new BitStream[4096];
+            _entityBaseSpawnKeys = new int[4096];
             _snapHistory = new Snapshot[32];
 
             _reliableSequence = 0;
@@ -261,7 +262,10 @@ namespace GBH
                 if (_snap.Entities[i] != null)
                 {
                     var refEnt = _snap.Entities[i].GetRenderEntity();
-                    refEnt.Render(device, effect, camera);
+                    refEnt?.Render(device, effect, camera);
+
+                    // FIXME: move this out in the future
+                    _snap.Entities[i].ClientProcess();
                 }
             }
         }
@@ -410,6 +414,7 @@ namespace GBH
         }
 
         private static BitStream[] _entityBases;
+        private static int[] _entityBaseSpawnKeys;
 
         private static void ProcessSnapshot(BitStream message)
         {
@@ -430,16 +435,24 @@ namespace GBH
 
             while (entityNumber != 4095)
             {
+                var spawnKey = message.ReadInt32(20);
+
                 var entityBase = (_entityBases[entityNumber] != null) ? _entityBases[entityNumber] : null;
+
+                if (_entityBaseSpawnKeys[entityNumber] != spawnKey)
+                {
+                    entityBase = null;
+                }
+
                 var deltaMessage = new DeltaBitStream(entityBase, message);
 
-                var spawnKey = deltaMessage.ReadInt32(20);
                 var typeCode = deltaMessage.ReadInt32(4);
 
                 snapshot.Entities[entityNumber] = Entity.Create(typeCode);
                 snapshot.Entities[entityNumber].Deserialize(deltaMessage);
 
                 _entityBases[entityNumber] = deltaMessage.NewBase;
+                _entityBaseSpawnKeys[entityNumber] = spawnKey;
 
                 entityNumber = message.ReadInt32(12);
             }
