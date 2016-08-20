@@ -72,7 +72,7 @@ namespace GBH
             }
         }
 
-        private static void LoadPalettes(Stream styleFile, uint length)
+        private static void LoadPalettes(Stream styleFile, int length)
         {
             BinaryReader reader = new BinaryReader(styleFile);
             _palette = new uint[length / 4];

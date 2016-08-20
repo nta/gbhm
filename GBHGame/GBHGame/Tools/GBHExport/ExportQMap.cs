@@ -44,7 +44,7 @@ namespace GBH
                         {
                             for (int a = (x * cellWidth); a < (x * cellWidth) + cellWidth; a++)
                             {
-                                var block = MapManager.GetBlock(a, b, c);
+                                var block = MapManager.CurrentMap.GetBlock(a, b, c);
 
                                 cellWriter.Write(block.Left.Value);
                                 cellWriter.Write(block.Right.Value);

@@ -233,7 +233,7 @@ namespace GBH
                 {
                     for (int y = Y; y < (Y + _size); y++)
                     {
-                        BlockInfo block = MapManager.GetBlock(x, y, z);
+                        BlockInfo block = MapManager.CurrentMap.GetBlock(x, y, z);
                         BlockGeometry geometry = MapGeometry.GetBlock(block.SlopeType.Slope);
 
                         Vector3 offsetVector = new Vector3(x, -y, z);

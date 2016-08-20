@@ -21,12 +21,12 @@ namespace GBH
     public class GBMPChunk
     {
         public uint Type { get; set; }
-        public uint Size { get; set; }
+        public int Size { get; set; }
 
         public void Read(BinaryReader reader)
         {
             Type = reader.ReadUInt32();
-            Size = reader.ReadUInt32();
+            Size = reader.ReadInt32();
         }
     }
 }

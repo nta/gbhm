@@ -164,7 +164,7 @@ namespace GBH
             y1 -= 5;
             y2 += 5;
 
-            var lights = from light in MapManager.Lights
+            var lights = from light in MapManager.CurrentMap.Lights
                          where light.Position.X > x1 && light.Position.X < x2 && light.Position.Y > y1 && light.Position.Y < y2
                          select light;
 

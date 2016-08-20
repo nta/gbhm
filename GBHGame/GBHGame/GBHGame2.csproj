@@ -147,7 +147,7 @@
     <Compile Include="Common\DeltaBitStream.cs" />
     <Compile Include="Common\EventSystem.cs" />
     <Compile Include="Common\Extensions.cs" />
-    <Compile Include="Common\FileHeaders.cs" />
+    <Compile Include="Game\DataFormats\FileHeaders.cs" />
     <Compile Include="Common\FileSystem.cs" />
     <Compile Include="Common\FileSystem\DirectorySearchPath.cs" />
     <Compile Include="Common\FileSystem\ISearchPath.cs" />
@@ -170,6 +170,9 @@
     <Compile Include="Game\Client\Snapshot.cs" />
     <Compile Include="Game\Common\PlayerMovement.cs" />
     <Compile Include="Game\Common\UserCommand.cs" />
+    <Compile Include="Game\DataFormats\BlockInfo.cs" />
+    <Compile Include="Game\DataFormats\CompressedMap.cs" />
+    <Compile Include="Game\DataFormats\MapLight.cs" />
     <Compile Include="Game\DebugCamera.cs" />
     <Compile Include="Game\Entities\BulletEntity.cs" />
     <Compile Include="Game\Entities\Entity.cs" />
@@ -202,6 +205,7 @@
     <Compile Include="Renderer\RendererInit.cs" />
     <Compile Include="Renderer\ShadowRenderer.cs" />
     <Compile Include="System\Win32.cs" />
+    <Compile Include="Tools\GBHExport\ExportG2MP.cs" />
     <Compile Include="Tools\GBHExport\ExportQMap.cs" />
     <Compile Include="Tools\GBHFormats\Sty2Mat.cs" />
     <Compile Include="XGame.cs" />
