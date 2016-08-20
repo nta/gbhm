@@ -205,7 +205,6 @@
     <Compile Include="Renderer\RendererInit.cs" />
     <Compile Include="Renderer\ShadowRenderer.cs" />
     <Compile Include="System\Win32.cs" />
-    <Compile Include="Tools\GBHExport\ExportG2MP.cs" />
     <Compile Include="Tools\GBHExport\ExportQMap.cs" />
     <Compile Include="Tools\GBHFormats\Sty2Mat.cs" />
     <Compile Include="XGame.cs" />
