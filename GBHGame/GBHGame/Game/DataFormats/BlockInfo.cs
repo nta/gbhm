@@ -30,7 +30,7 @@ namespace GBH
             }
         }
 
-        public ushort Value
+        public byte Value
         {
             get
             {
@@ -39,7 +39,7 @@ namespace GBH
         }
     }
 
-    public struct SideTile
+    public class SideTile
     {
         private ushort _value;
 
@@ -50,6 +50,12 @@ namespace GBH
             get
             {
                 return (ushort)(_value & 0x3FF);
+            }
+            set
+            {
+                int temp = _value & ~0x3FF;
+                temp |= value & 0x3FF;
+                _value = (ushort)temp;
             }
         }
 
@@ -125,6 +131,19 @@ namespace GBH
             Arrows = reader.ReadByte();
 
             SlopeType = new SlopeType(reader.ReadByte());
+        }
+
+        public void Write(BinaryWriter writer)
+        {
+            writer.Write(Left.Value);
+            writer.Write(Right.Value);
+            writer.Write(Top.Value);
+            writer.Write(Bottom.Value);
+            writer.Write(Lid.Value);
+
+            writer.Write(Arrows);
+
+            writer.Write(SlopeType.Value);
         }
     }
 }

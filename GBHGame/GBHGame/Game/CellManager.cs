@@ -282,9 +282,7 @@ namespace GBH
 
                 BlockSide modifiedSide = ModifySide(side, part);
 
-                ushort sprite = part.Sprite;
-
-                string materialName = string.Format("gbh/bil/{0}", sprite);
+                string materialName = MapManager.CurrentMap.ResolveSprite(part.Sprite);
                 Material material = MaterialManager.FindMaterial(materialName);
 
                 var bank = GetBank(material.BaseName);

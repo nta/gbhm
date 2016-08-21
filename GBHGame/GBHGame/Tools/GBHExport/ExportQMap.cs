@@ -19,7 +19,7 @@ namespace GBH
 
             ConVar.Initialize();
             FileSystem.Initialize();
-            MapManager.Load("Maps/" + filename + ".gmp");
+            MapManager.Load(filename);
 
             // export cell files
             var cellWidth = 32;

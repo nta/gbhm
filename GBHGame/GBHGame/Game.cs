@@ -68,7 +68,16 @@ namespace GBH
             AudioManager.Initialize();
             Renderer.Initialize();
             MaterialManager.ReadMaterialFile("base.material");
-            MaterialManager.ReadMaterialFile("Styles/bil.material");
+
+            {
+                var files = FileSystem.ListFiles("Styles/", "material");
+
+                foreach (var file in files)
+                {
+                    MaterialManager.ReadMaterialFile(file);
+                }
+            }
+
             ConsoleRenderer.Initialize();
             //StyleManager.CreateTextures(Renderer.Device);
             MapRenderer.Initialize(Renderer.Device);

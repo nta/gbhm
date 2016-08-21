@@ -23,6 +23,12 @@ namespace GBH
                     return;
                 }
 
+                if (args[0] == "convertMap")
+                {
+                    ExportG2MP.ExportMain(args);
+                    return;
+                }
+
                 if (args[0] == "sty2mat")
                 {
                     Sty2Mat.ToolMain(args);

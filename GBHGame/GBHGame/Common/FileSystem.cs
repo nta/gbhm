@@ -56,6 +56,12 @@ namespace GBH
 
         public static Stream OpenRead(string path)
         {
+            // temporary stuff
+            if (path[1] == ':')
+            {
+                return File.OpenRead(path);
+            }
+
             foreach (var searchPath in _searchPaths)
             {
                 if (searchPath.FileExists(path))

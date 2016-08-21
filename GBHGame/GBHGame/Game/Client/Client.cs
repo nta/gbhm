@@ -537,7 +537,7 @@ namespace GBH
             // load the server's current map
             var mapName = message.ReadString();
 
-            MapManager.Load(string.Format("Maps/{0}.gmp", mapName));
+            MapManager.Load(mapName);
         }
 
         private static void ProcessServerMessage(BitStream message)
@@ -641,7 +641,7 @@ namespace GBH
                     if (!ConVar.GetValue<bool>("sv_running"))
                     {
                         Server.CreatePhysicsWorld();
-                        MapManager.Load(string.Format("Maps/{0}.gmp", args[2]));
+                        MapManager.Load(args[2]);
                     }
 
                     _lastConnectPacketTime = -999999;

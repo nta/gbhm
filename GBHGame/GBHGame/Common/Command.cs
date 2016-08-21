@@ -43,7 +43,7 @@ namespace GBH
                 }
                 var mapName = args[1];
 
-                MapManager.Load(string.Format("Maps/{0}.gmp", mapName));
+                MapManager.Load(mapName);
                 Server.InitializeMap(mapName);
 
                 Client.Connect_f(new[] { "connect", "localhost" });

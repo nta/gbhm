@@ -50,6 +50,35 @@ namespace GBH
             }
         }
 
+        public void Write(Stream stream)
+        {
+            Write(new BinaryWriter(stream));
+        }
+
+        public void Write(BinaryWriter writer)
+        {
+            for (int i = 0; i < (256 * 256); i++)
+            {
+                writer.Write(Base[i]);
+            }
+
+            writer.Write(Column.Length);
+
+            // write columns
+            for (int i = 0; i < Column.Length; i++)
+            {
+                writer.Write(Column[i]);
+            }
+
+            // read blocks
+            writer.Write(Block.Length);
+
+            for (int i = 0; i < Block.Length; i++)
+            {
+                Block[i].Write(writer);
+            }
+        }
+
         public static CompressedMap ReadFromStream(Stream stream)
         {
             var compressedMap = new CompressedMap();

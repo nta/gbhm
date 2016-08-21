@@ -48,6 +48,43 @@ namespace GBH
             return retval;
         }
 
+        public void Write(Stream stream)
+        {
+            Write(new BinaryWriter(stream));
+        }
+
+        public void Write(BinaryWriter writer)
+        {
+            writer.Write(((int)Color.R << 16) | ((int)Color.G << 8) | ((int)Color.B << 0));
+
+            WriteFix16(writer, Position.X);
+            WriteFix16(writer, Position.Y);
+            WriteFix16(writer, Position.Z);
+            WriteFix16(writer, Radius);
+
+            writer.Write(Intensity);
+            writer.Write(Shape);
+            writer.Write(OnTime);
+            writer.Write(OffTime);
+        }
+
+        private void WriteFix16(BinaryWriter writer, float value)
+        {
+            // write the sign
+            ushort writeValue = (ushort)((value < 0f) ? 0x8000 : 0);
+            value = Math.Abs(value);
+
+            // write the fractional component
+            float fraction = (float)(value - Math.Floor(value));
+            writeValue |= ((byte)(fraction * 128.0f));
+
+            // write the whole component
+            writeValue |= (ushort)((((int)value) << 7) & 0x7FFF);
+
+            // write the composed value
+            writer.Write(writeValue);            
+        }
+
         public static MapLight[] ReadFromStream(Stream stream, int numLights)
         {
             BinaryReader reader = new BinaryReader(stream);

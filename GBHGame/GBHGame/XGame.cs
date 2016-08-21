@@ -41,7 +41,7 @@ namespace GBH
             ConVar.Initialize();
             FileSystem.Initialize();
             StyleManager.Load("Styles/bil.sty");
-            MapManager.Load("Maps/MP1-comp.gmp");
+            MapManager.Load("MP1-comp");
             MapGeometry.Initialize();
             Camera.Initialize();
 

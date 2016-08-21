@@ -172,6 +172,9 @@
     <Compile Include="Game\Common\UserCommand.cs" />
     <Compile Include="Game\DataFormats\BlockInfo.cs" />
     <Compile Include="Game\DataFormats\CompressedMap.cs" />
+    <Compile Include="Game\DataFormats\GBH2Map.cs" />
+    <Compile Include="Game\DataFormats\GBHMap.cs" />
+    <Compile Include="Game\DataFormats\MapFileBase.cs" />
     <Compile Include="Game\DataFormats\MapLight.cs" />
     <Compile Include="Game\DebugCamera.cs" />
     <Compile Include="Game\Entities\BulletEntity.cs" />
@@ -205,7 +208,9 @@
     <Compile Include="Renderer\RendererInit.cs" />
     <Compile Include="Renderer\ShadowRenderer.cs" />
     <Compile Include="System\Win32.cs" />
+    <Compile Include="Tools\GBHExport\ExportG2MP.cs" />
     <Compile Include="Tools\GBHExport\ExportQMap.cs" />
+    <Compile Include="Tools\GBHExport\MMPReader.cs" />
     <Compile Include="Tools\GBHFormats\Sty2Mat.cs" />
     <Compile Include="XGame.cs" />
     <Compile Include="Renderer\Renderer2D.cs" />
